@@ -1,5 +1,5 @@
 // Configure a URL do seu backend aqui
-const API_URL = "https://seu-backend.onrender.com";
+const API_URL = " https://controle-gastos-backend-1-ahol.onrender.com";
 
 async function carregarGastos() {
   const container = document.getElementById("gastos");
