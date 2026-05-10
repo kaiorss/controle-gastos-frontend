@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Controle de Gastos</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -47,6 +48,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container">
     <h1>Controle de Gastos</h1>
@@ -55,7 +57,7 @@
     <input id="descricao" placeholder="Descrição" />
     <input id="valor" type="number" placeholder="Valor" />
     <input id="categoria" placeholder="Categoria" />
-    <button onclick="cadastrarGasto()">Cadastrar</button>
+    <button onclick="criarGasto()">Cadastrar</button>
 
     <h2>Resumo</h2>
     <p>Total gasto: R$ <span id="totalGasto">0</span></p>
@@ -63,87 +65,11 @@
     <p>Total pendente: R$ <span id="totalPendente">0</span></p>
 
     <h2>Lista de gastos</h2>
-    <div id="listaGastos"></div>
+    <div id="gastos"></div>
+
+    <div id="mensagem"></div>
   </div>
 
-  <script>
-    const API_URL = "http://localhost:5000";
-
-    async function carregarGastos() {
-      const resposta = await fetch(`${API_URL}/gastos`);
-      const dados = await resposta.json();
-
-      const lista = document.getElementById("listaGastos");
-      lista.innerHTML = "";
-
-      dados.gastos.forEach(gasto => {
-        const div = document.createElement("div");
-        div.className = `gasto ${gasto.pago ? "pago" : "pendente"}`;
-
-        div.innerHTML = `
-          <strong>${gasto.descricao}</strong><br>
-          Categoria: ${gasto.categoria}<br>
-          Valor: R$ ${gasto.valor.toFixed(2)}<br>
-          Status: ${gasto.pago ? "Pago" : "Pendente"}<br>
-          Data: ${gasto.data}<br>
-          ${!gasto.pago ? `<button onclick="marcarPago(${gasto.id})">Marcar como pago</button>` : ""}
-          <button onclick="deletarGasto(${gasto.id})">Excluir</button>
-        `;
-
-        lista.appendChild(div);
-      });
-    }
-
-    async function carregarResumo() {
-      const resposta = await fetch(`${API_URL}/gastos/resumo`);
-      const resumo = await resposta.json();
-
-      document.getElementById("totalGasto").innerText = resumo.total_gasto.toFixed(2);
-      document.getElementById("totalPago").innerText = resumo.total_pago.toFixed(2);
-      document.getElementById("totalPendente").innerText = resumo.total_pendente.toFixed(2);
-    }
-
-    async function cadastrarGasto() {
-      const descricao = document.getElementById("descricao").value;
-      const valor = document.getElementById("valor").value;
-      const categoria = document.getElementById("categoria").value;
-
-      await fetch(`${API_URL}/gastos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ descricao, valor, categoria })
-      });
-
-      document.getElementById("descricao").value = "";
-      document.getElementById("valor").value = "";
-      document.getElementById("categoria").value = "";
-
-      carregarGastos();
-      carregarResumo();
-    }
-
-    async function marcarPago(id) {
-      await fetch(`${API_URL}/gastos/${id}/pagar`, {
-        method: "PUT"
-      });
-
-      carregarGastos();
-      carregarResumo();
-    }
-
-    async function deletarGasto(id) {
-      await fetch(`${API_URL}/gastos/${id}`, {
-        method: "DELETE"
-      });
-
-      carregarGastos();
-      carregarResumo();
-    }
-
-    carregarGastos();
-    carregarResumo();
-  </script>
+  <script src="scripts.js"></script>
 </body>
 </html>
