@@ -35,9 +35,14 @@ async function carregarResumo() {
 
     const resumo = await response.json();
 
-    document.getElementById("totalGasto").innerText = Number(resumo.total_gasto).toFixed(2);
-    document.getElementById("totalPago").innerText = Number(resumo.total_pago).toFixed(2);
-    document.getElementById("totalPendente").innerText = Number(resumo.total_pendente).toFixed(2);
+    document.getElementById("totalGasto").innerText =
+  Number(resumo.total || 0).toFixed(2);
+
+document.getElementById("totalPago").innerText =
+  Number(resumo.pagos || 0).toFixed(2);
+
+document.getElementById("totalPendente").innerText =
+  Number(resumo.pendentes || 0).toFixed(2);
 
   } catch (erro) {
     console.error("Erro ao carregar resumo:", erro);
