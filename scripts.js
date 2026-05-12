@@ -22,7 +22,7 @@ async function carregarGastos() {
         <p><strong>Data:</strong> ${gasto.data}</p>
 
         ${!gasto.pago ? `
-          <button onclick="marcarComoPago(${gasto.id})">
+          <button class="btn-pagar" onclick="marcarComoPago(${gasto.id})">
             Marcar como Pago
           </button>
         ` : ""}
