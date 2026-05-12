@@ -101,6 +101,22 @@
       box-shadow: 0 12px 25px rgba(37, 99, 235, 0.45);
     }
 
+    .btn-pagar {
+      margin-top: 15px;
+      padding: 10px 16px;
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(22, 163, 74, 0.3);
+    }
+
+    .btn-pagar:hover {
+      background: linear-gradient(135deg, #15803d, #166534);
+    }
+
     .resumo-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -188,6 +204,7 @@
     <p class="version">v1.0.4 - Frontend integrado ao Backend Render</p>
 
     <h2>Cadastrar gasto</h2>
+
     <div class="form-card">
       <div class="form-grid">
         <input id="descricao" placeholder="Descrição do gasto" />
@@ -198,8 +215,10 @@
     </div>
 
     <h2>Resumo financeiro</h2>
+
     <div class="resumo-card">
       <div class="resumo-grid">
+
         <div class="resumo-item">
           <p>Total gasto</p>
           <strong>R$ <span id="totalGasto">0</span></strong>
@@ -214,10 +233,12 @@
           <p>Total pendente</p>
           <strong>R$ <span id="totalPendente">0</span></strong>
         </div>
+
       </div>
     </div>
 
     <h2>Lista de gastos</h2>
+
     <div class="lista-card">
       <div id="listaGastos"></div>
     </div>
@@ -230,5 +251,3 @@
   <script src="scripts.js"></script>
 </body>
 </html>
-
-
