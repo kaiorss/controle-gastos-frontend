@@ -14,19 +14,15 @@ async function carregarGastos() {
         <h3>${gasto.descricao}</h3>
 
         <p><strong>Valor:</strong> R$ ${Number(gasto.valor).toFixed(2)}</p>
-
         <p><strong>Categoria:</strong> ${gasto.categoria}</p>
-
         <p><strong>Status:</strong> ${gasto.pago ? "Pago" : "Pendente"}</p>
-
         <p><strong>Data:</strong> ${gasto.data}</p>
 
         ${!gasto.pago ? `
-          <button onclick="marcarComoPago(${gasto.id})">
+          <button class="btn-pagar" onclick="marcarComoPago(${gasto.id})">
             Marcar como Pago
           </button>
         ` : ""}
-
       </div>
     `).join("");
 
@@ -47,13 +43,13 @@ async function carregarResumo() {
     const resumo = await response.json();
 
     document.getElementById("totalGasto").innerText =
-      Number(resumo.total || 0).toFixed(2);
+      Number(resumo.total_gasto || 0).toFixed(2);
 
     document.getElementById("totalPago").innerText =
-      Number(resumo.pagos || 0).toFixed(2);
+      Number(resumo.total_pago || 0).toFixed(2);
 
     document.getElementById("totalPendente").innerText =
-      Number(resumo.pendentes || 0).toFixed(2);
+      Number(resumo.total_pendente || 0).toFixed(2);
 
   } catch (erro) {
     console.error("Erro ao carregar resumo:", erro);
@@ -61,11 +57,8 @@ async function carregarResumo() {
 }
 
 window.cadastrarGasto = async function cadastrarGasto() {
-
   const descricao = document.getElementById("descricao").value.trim();
-
   const valor = document.getElementById("valor").value.trim();
-
   const categoria = document.getElementById("categoria").value.trim();
 
   if (!descricao || !valor || !categoria) {
@@ -94,7 +87,6 @@ window.cadastrarGasto = async function cadastrarGasto() {
 };
 
 window.marcarComoPago = async function marcarComoPago(id) {
-
   await fetch(`${API_URL}/gastos/${id}/pagar`, {
     method: "PUT"
   });
