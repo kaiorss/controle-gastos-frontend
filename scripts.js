@@ -1,4 +1,4 @@
-const API_URL = "https://controle-gastos-frontend-2vjmggsh6-kaiorss-projects.vercel.app";
+const API_URL = "https://controle-gastos-frontend-two.vercel.app/";
 
 async function carregarGastos() {
   const container = document.getElementById("listaGastos");
