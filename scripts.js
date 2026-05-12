@@ -1,4 +1,4 @@
-const API_URL = "https://controle-gastos-frontend-two.vercel.app/";
+const API_URL = "https://controle-gastos-backend-1-ahol.onrender.com";
 
 async function carregarGastos() {
   const container = document.getElementById("listaGastos");
@@ -22,7 +22,7 @@ async function carregarGastos() {
         <p><strong>Data:</strong> ${gasto.data}</p>
 
         ${!gasto.pago ? `
-          <button class="btn-pagar" onclick="marcarComoPago(${gasto.id})">
+          <button onclick="marcarComoPago(${gasto.id})">
             Marcar como Pago
           </button>
         ` : ""}
