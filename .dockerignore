@@ -1,0 +1,14 @@
+# evita copiar o histórico do git para dentro da imagem
+.git
+
+# evita copiar os workflows do github actions para dentro da imagem
+.github
+
+# evita copiar a pasta de dependências, caso exista
+node_modules
+
+# evita copiar arquivos de log do npm
+npm-debug.log
+
+# evita copiar arquivos de variáveis de ambiente
+.env
