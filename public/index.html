@@ -3,251 +3,134 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Controle de Gastos</title>
+
+  <title>Front com Nginx e Docker</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
-      padding: 30px;
-      color: #1e293b;
-    }
-
-    .container {
-      max-width: 950px;
-      margin: auto;
-      background: rgba(255, 255, 255, 0.96);
-      padding: 35px;
-      border-radius: 24px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 36px;
-      color: #0f172a;
-      margin-bottom: 8px;
-    }
-
-    .version {
-      text-align: center;
-      color: #64748b;
-      margin-bottom: 30px;
-      font-size: 14px;
-    }
-
-    h2 {
-      margin: 28px 0 15px;
-      color: #1e40af;
-      font-size: 22px;
-      border-left: 5px solid #2563eb;
-      padding-left: 10px;
-    }
-
-    .form-card,
-    .resumo-card,
-    .lista-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      padding: 22px;
-      border-radius: 18px;
-      margin-top: 15px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr auto;
-      gap: 12px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px 14px;
-      border-radius: 12px;
-      border: 1px solid #cbd5e1;
-      font-size: 15px;
-      outline: none;
-      transition: 0.2s;
-      background: white;
-    }
-
-    input:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
-    }
-
-    button {
-      cursor: pointer;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 13px 20px;
-      font-weight: bold;
-      font-size: 15px;
-      transition: 0.2s;
-      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.3);
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.45);
-    }
-
-    .btn-pagar {
-      margin-top: 15px;
-      padding: 10px 16px;
-      background: linear-gradient(135deg, #16a34a, #15803d);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(22, 163, 74, 0.3);
-    }
-
-    .btn-pagar:hover {
-      background: linear-gradient(135deg, #15803d, #166534);
-    }
-
-    .resumo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .resumo-item {
-      background: white;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
-    }
-
-    .resumo-item p {
-      color: #64748b;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .resumo-item strong {
-      font-size: 24px;
-      color: #0f172a;
-    }
-
-    #listaGastos {
-      display: grid;
-      gap: 14px;
-    }
-
-    .gasto {
-      border: none;
-      padding: 18px;
-      margin-top: 10px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
-      transition: 0.2s;
-    }
-
-    .gasto:hover {
-      transform: scale(1.01);
-    }
-
-    .pago {
-      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-      border-left: 6px solid #16a34a;
-    }
-
-    .pendente {
-      background: linear-gradient(135deg, #fee2e2, #fecaca);
-      border-left: 6px solid #dc2626;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 30px;
-      color: #64748b;
-      font-size: 13px;
-    }
-
-    @media (max-width: 850px) {
-      .form-grid,
-      .resumo-grid {
-        grid-template-columns: 1fr;
-      }
-
-      body {
-        padding: 15px;
-      }
-
-      .container {
-        padding: 22px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-    }
+    /* MANTÉM TODO O SEU CSS AQUI IGUAL */
   </style>
 </head>
 
 <body>
+
   <div class="container">
-    <h1>💰 Controle de Gastos</h1>
-    <p class="version">v1.0.4 - Frontend integrado ao Backend Render</p>
+
+    <h1>Front com Nginx e Docker</h1>
+
+    <!-- Botão solicitado no trabalho -->
+    <button onclick="chamarAPI()">
+      Testar API
+    </button>
+
+    <!-- Resposta da rota /v1 -->
+    <p id="resposta"></p>
+
+
+    <p class="version">
+      v1.0.4 - Frontend integrado ao Backend Render
+    </p>
+
+
 
     <h2>Cadastrar gasto</h2>
 
     <div class="form-card">
+
       <div class="form-grid">
-        <input id="descricao" placeholder="Descrição do gasto" />
-        <input id="valor" type="number" placeholder="Valor em R$" />
-        <input id="categoria" placeholder="Categoria" />
-        <button onclick="cadastrarGasto()">Cadastrar</button>
+
+        <input 
+          id="descricao" 
+          placeholder="Descrição do gasto" 
+        />
+
+        <input 
+          id="valor" 
+          type="number" 
+          placeholder="Valor em R$" 
+        />
+
+        <input 
+          id="categoria" 
+          placeholder="Categoria" 
+        />
+
+        <button onclick="cadastrarGasto()">
+          Cadastrar
+        </button>
+
       </div>
+
     </div>
+
+
 
     <h2>Resumo financeiro</h2>
 
+
     <div class="resumo-card">
+
       <div class="resumo-grid">
 
         <div class="resumo-item">
+
           <p>Total gasto</p>
-          <strong>R$ <span id="totalGasto">0</span></strong>
+
+          <strong>
+            R$ <span id="totalGasto">0</span>
+          </strong>
+
         </div>
 
+
         <div class="resumo-item">
+
           <p>Total pago</p>
-          <strong>R$ <span id="totalPago">0</span></strong>
+
+          <strong>
+            R$ <span id="totalPago">0</span>
+          </strong>
+
         </div>
 
+
         <div class="resumo-item">
+
           <p>Total pendente</p>
-          <strong>R$ <span id="totalPendente">0</span></strong>
+
+          <strong>
+            R$ <span id="totalPendente">0</span>
+          </strong>
+
         </div>
 
       </div>
+
     </div>
+
+
+
 
     <h2>Lista de gastos</h2>
 
+
     <div class="lista-card">
+
       <div id="listaGastos"></div>
+
     </div>
+
+
+
 
     <footer>
       Projeto de Controle de Gastos com CI/CD, Vercel e Render
     </footer>
+
+
   </div>
 
+
   <script src="scripts.js"></script>
+
 </body>
 </html>
