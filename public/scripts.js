@@ -1,4 +1,4 @@
-const API_URL = "https://controle-gastos-backend-2.onrender.com";
+const API_URL = "https://musical-invention-4j6jj76pg45rhj76v-5000.app.github.dev";
 
 // ===============================
 // TESTAR API V1
